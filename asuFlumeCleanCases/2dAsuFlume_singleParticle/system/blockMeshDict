@@ -18,14 +18,14 @@ convertToMeters 1;
 vertices
 (
     // Lower block (0 to 0.08 in y)
-    (0 0    0)     
-    (1 0    0)     
-    (1 0.20 0)   
-    (0 0.20 0)   
-    (0 0    0.08) // inlet  
-    (1 0    0.08)  
-    (1 0.20 0.08)
-    (0 0.20 0.08)
+    (0 0    0)    // 0     
+    (1 0    0)    // 1   
+    (1 0.20 0)    // 2 
+    (0 0.20 0)    // 3 
+    (0 0    0.08) // 4 inlet  
+    (1 0    0.08) // 5
+    (1 0.20 0.08) // 6
+    (0 0.20 0.08) // 7
 
     // Upper block (0.075 to 0.25 in y)
     (0 0.0  0.25)   //water height
@@ -36,8 +36,8 @@ vertices
 
 blocks
 (
-    hex (0 1 2 3 4 5 6 7) (200 1 16) simpleGrading (1 1 1) // Lower block
-    hex (4 5 6 7 8 9 10 11) (200 1 34) simpleGrading (1 1 1) // Upper block
+    hex (0 1 2 3 4 5 6 7) (100 1 8) simpleGrading (1 1 1) // Lower block
+    hex (4 5 6 7 8 9 10 11) (100 1 17) simpleGrading (1 1 1) // Upper block
 );
 
 boundary
@@ -62,21 +62,43 @@ boundary
     
     groundAndWall
     {
-        type wall;
-        faces
+      type wall;
+      faces
         (
-            (4 8 11 7)
-            (5 9 8 4)
-	    (6 10 9 5)
-	    (7 11 10 6)
-            (1 5 4 0)
-            (2 6 5 1)
-            (3 7 6 2)
-            (1 0 3 2)
-        );
+	 // ground
+         (1 0 3 2) // Ground/tank bottom 
+
+	 //walls
+	 (4 8 11 7) // upper left wall
+	 (6 10 9 5) // far right wall
+	 (2 6 5 1) // lower right wall
+
+	 );
     }
 
-);
+    front
+    {
+      type empty;
+      faces
+	(
+	 // front
+	 (5 9 8 4) // front of upper
+	 (1 5 4 0) // lower front of tank
+	 );
+    }
+
+    back
+    {
+      type empty;
+      faces
+	(
+	 // back 
+	 (7 11 10 6) // upper back 
+	 (3 7 6 2) // bottom back wall
+	 );
+    }
+
+ );
 
 
 // ************************************************************************* //
