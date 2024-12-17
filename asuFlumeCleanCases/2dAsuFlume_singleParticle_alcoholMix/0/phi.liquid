@@ -8,55 +8,37 @@
 FoamFile
 {
     format      binary;
-    class       volScalarField;
+    class       surfaceScalarField;
     location    "0";
-    object      alpha.liquid;
+    object      phi.liquid;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+dimensions      [0 3 -1 0 0 0 0];
 
-internalField   uniform 1;
+internalField   uniform 0;
 
 boundaryField
 {
-
-inlet
-{
-    type            codedFixedValue;
-    value           uniform 1;  // Default initial value
-    name            timeDependentAlpha;  // Unique name for the boundary condition
-
-    code
-    #{
-        scalar t = this->db().time().value();
-        scalarField& field = *this;
-
-        // Set alpha value based on time
-        if (((t >= 0.0) && (t <= 4.0)))
-        {
-            field = scalar(0.9);  // Set alpha value to 0.3
-        }
-        else
-        {
-            field = scalar(0.0);  // Set alpha value to 0.0
-        }
-    #};
- }
-  top
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    top
     {
         type            calculated;
-        value           uniform 1;
+        value           uniform 0;
     }
     groundAndWall
     {
-        type            calculated;
-        value           uniform 1;
+        type            fixedValue;
+        value           uniform 0;
     }
     axis
     {
         type            calculated;
-        value           uniform 1;
+        value           uniform 0;
     }
     front
     {

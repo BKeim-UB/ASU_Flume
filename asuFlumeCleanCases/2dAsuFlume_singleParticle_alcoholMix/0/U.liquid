@@ -10,7 +10,7 @@ FoamFile
     format      ascii;
     class       volVectorField;
     location    "0";
-    object      U.particles1;
+    object      U.liquid;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -23,7 +23,7 @@ boundaryField
     top
     {
         type            pressureInletOutletVelocity;
-        phi             phi.particles1;
+        phi             phi.liquid;
         value           uniform (0 0 0);
     }
     axis
@@ -47,15 +47,15 @@ boundaryField
       {
 	type            codedFixedValue;
 	value           uniform (0 0 0);  // Default initial value
-	name            timeDependentUparticles1;
+	name            timeDependentUliquid;
 
 	code
-	  #{
-	  scalar t = this->db().time().value();
-       if ((t >= 0.0) && (t <= 4.0))
+	#{
+	scalar t = this->db().time().value();
+	if (((t >= 0.0) && (t <= 2.0)))
 	  {
             vectorField& field = *this;
-            field = vector(0.15, 0.0, 0.0);  // Set velocity to (1.0, 0.0, 0.0)
+            field = vector(0.1, 0.0, 0.0);  // Set velocity to (1.0, 0.0, 0.0)
 	  }
         else
 	  {
@@ -64,6 +64,14 @@ boundaryField
 	  }
 	#};
       }
+
+
+ //    inlet
+ //   {
+ //     type            fixedValue;
+ //     value           uniform (0 -0.1 0);
+
+ //   }
 }
 
 

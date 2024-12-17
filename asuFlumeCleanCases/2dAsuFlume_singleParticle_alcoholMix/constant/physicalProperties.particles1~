@@ -10,14 +10,14 @@ FoamFile
     format      ascii;
     class       dictionary;
     location    "constant";
-    object      physicalProperties.liquid;
+    object      physicalProperties.particles1;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 thermoType
 {
     type            heRhoThermo;
-    mixture         multiConponentMixture;
+    mixture         pureMixture;
     transport       const;
     thermo          hConst;
     equationOfState rhoConst;
@@ -25,57 +25,25 @@ thermoType
     energy          sensibleEnthalpy;
 }
 
-defaultSpecie water;
-
-species
-(
- water
- alcohol
- );
-
-water
+mixture
 {
     specie
     {
-        molWeight   28.9;
+        molWeight   14;
     }
     equationOfState
     {
-      rho 997;
+        rho         1400;
     }
     thermodynamics
     {
-        Cp          4181;
+        Cp          1000;
         Hf          0;
     }
     transport
     {
-        mu          8.9e-04;
-        Pr          6.127;
-    }
-}
-
-
-
-alcohol
-{
-    specie
-    {
-        molWeight   28.9;
-    }
-    equationOfState
-    {
-      rho 750;
-    }
-    thermodynamics
-    {
-        Cp          4181;
-        Hf          0;
-    }
-    transport
-    {
-        mu          8.9e-04;
-        Pr          6.127;
+        mu          0;
+        Pr          1;
     }
 }
 
