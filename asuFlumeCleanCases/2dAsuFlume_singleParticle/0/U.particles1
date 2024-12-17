@@ -52,7 +52,7 @@ boundaryField
 	code
 	  #{
 	  scalar t = this->db().time().value();
-       if ((t >= 0.0) && (t <= 4.0))
+	if ((t >= 0.0) && (t <= 4.0))
 	  {
             vectorField& field = *this;
             field = vector(0.15, 0.0, 0.0);  // Set velocity to (1.0, 0.0, 0.0)
