@@ -1,0 +1,28 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  12
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      topoGridDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+rasterFile topography.asc;
+xVent 0.0;
+yVent 0.0;
+expFactor 1.0;
+dzVert 30.0;
+exp_shape 1.4;
+interpRelRadius 4.0;  // start from 4 and decrease or increase to get "Face tets OK"
+saveSTL false;
+saveBinary true;
+raiseTop false;
+// ************************************************************************* //

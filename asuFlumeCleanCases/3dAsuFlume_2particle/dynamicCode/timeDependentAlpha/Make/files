@@ -1,0 +1,6 @@
+# dynamicCode:
+# SHA1 = b98e81a53b9d0c5531a4a94d108123a14bfddd43
+
+codedFixedValueFvPatchFieldTemplate.C
+
+LIB = $(PWD)/../platforms/$(WM_OPTIONS)/lib/libtimeDependentAlpha_b98e81a53b9d0c5531a4a94d108123a14bfddd43
