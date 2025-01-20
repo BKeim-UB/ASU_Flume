@@ -1,0 +1,110 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  10
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 1;
+ 
+vertices
+(
+    // Lower block (0 to 0.08 in y)
+    (0 0    0)    // 0     
+    (1 0    0)    // 1   
+    (1 0.20 0)    // 2 
+    (0 0.20 0)    // 3 
+    (0 0    0.05) // 4 inlet  
+    (1 0    0.05) // 5
+    (1 0.20 0.05) // 6
+    (0 0.20 0.05) // 7
+
+    // Upper block (0.075 to 0.25 in y)
+    (0 0.0  0.25)   //water height
+    (1 0.0  0.25)   
+    (1 0.20 0.25)
+    (0 0.20 0.25)
+);
+
+blocks
+(
+
+
+  hex (0 1 2 3 4 5 6 7) (400 80 20) simpleGrading (1 1 1) // Lower block
+ //   hex (0 1 2 3 4 5 6 7) (100 20 5) simpleGrading (1 1 1) // Lower block
+ //  hex (4 5 6 7 8 9 10 11) (100 20 20) simpleGrading (1 1 1) // Upper block
+   hex (4 5 6 7 8 9 10 11) (400 80 80) simpleGrading (1 1 1) // Upper block
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 7 3)
+        );
+    }
+
+    top
+    {
+        type patch;
+        faces
+        (
+            (8 9 10 11)
+        );
+    }
+    
+    groundAndWall
+    {
+      type wall;
+      faces
+        (
+	 // ground
+         (1 0 3 2) // Ground/tank bottom 
+
+	 //walls
+	 (4 8 11 7) // upper left wall
+	 (6 10 9 5) // far right wall
+	 (2 6 5 1) // lower right wall
+
+	 //front
+	 (5 9 8 4) // front of upper
+	 (1 5 4 0) // lower front of tank
+
+	 
+	 // back 
+	 (7 11 10 6) // upper back 
+	 (3 7 6 2) // bottom back wall
+	 );
+    }
+
+    front
+    {
+      type empty;
+      faces
+	(
+	 );
+    }
+
+    back
+    {
+      type empty;
+      faces
+	(
+	 );
+    }
+
+ );
+
+
+// ************************************************************************* //

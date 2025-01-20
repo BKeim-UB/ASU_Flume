@@ -1,0 +1,19 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  <version number>                      |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      reconstructParDict;
+}
+
+fields         (U.particles1 alpha.particles1 U.liquid);  // Fields to reconstruct
+time           (0.01:30);                                // Specify time range or steps
+lagrangian     false;                                    // Skip lagrangian fields
